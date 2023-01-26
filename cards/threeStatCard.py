@@ -49,7 +49,7 @@ def make_card(compN, name, statN1, statN2, statN3, stat1, stat2, stat3, date, bg
     #competition name
     draw.text((522, 50), text = compN, font = copmNameFont, fill = 'black', anchor = 'mm')
     #person name
-    draw.text((90, 140), text = 'Name:', font = signsFont, fill = 'black', anchor = 'lb')
+    draw.text((90, 140), text = 'Name', font = signsFont, fill = 'black', anchor = 'lb')
     draw.text((522, 200), text = name, font = textFont, fill = 'black', anchor = 'mm' )
     #stat1
     draw.text((90, 300), text = statN1, fill = 'black', anchor = 'lb', font = signsFont)
