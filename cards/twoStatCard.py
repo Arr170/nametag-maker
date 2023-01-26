@@ -1,11 +1,14 @@
 from PIL import Image, ImageDraw, ImageFont
 from backGround import make_bg
 
-def make_card(compN, name, statN1, statN2, stat1, stat2):
+def make_card(compN, name, statN1, statN2, stat1, stat2, bg):
 
-    ###filtration###
-    if(stat1 == '\t'): stat1 = 'Coming soon...'
-    if(stat2 == '\t'): stat2 = 'Coming soon...'
+    ###filter###
+    if(stat1 == '\t' or stat1 != stat1): stat1 = 'Coming soon...'
+    if(stat2 == '\t' or stat2 != stat2): stat2 = 'Coming soon...'
+    if(type(stat1) == float): stat1 = int(stat1)
+    if(type(stat2) == float): stat2 = int(stat2)
+
 
     textFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 80)
     nameFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 90)
@@ -19,7 +22,7 @@ def make_card(compN, name, statN1, statN2, stat1, stat2):
     imgName = f'{name}.png'
 
     #creating background
-    make_bg(imgName)
+    make_bg(imgName, bg)
 
 
     imgToMake = Image.open(imgName)
@@ -43,10 +46,10 @@ def make_card(compN, name, statN1, statN2, stat1, stat2):
     draw.text((622, 230), text = name, font = textFont, fill = 'black', anchor = 'mm' )
     #stat1
     draw.text((50, 390), text = statN1 + ':', fill = 'black', anchor = 'lm', font = signsFont)
-    draw.text((759, 390), text = stat1, font = statFont, fill = 'black', anchor = 'mm')
+    draw.text((759, 390), text = str(stat1), font = statFont, fill = 'black', anchor = 'mm')
     #stat2
     draw.text((50, 555), text = statN2 + ':', fill = 'black', anchor = 'lm', font = signsFont)
-    draw.text((759, 550), text = stat2, font = statFont, fill = 'black', anchor = 'mm')
+    draw.text((759, 550), text = str(stat2), font = statFont, fill = 'black', anchor = 'mm')
     
     
     imgToMake.save(imgName)

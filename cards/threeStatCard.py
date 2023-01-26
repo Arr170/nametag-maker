@@ -2,12 +2,16 @@ from PIL import Image, ImageDraw, ImageFont
 from backGround import make_bg
 
 
-def make_card(name, statN1, statN2, statN3, stat1, stat2, stat3, date):
+def make_card(compN, name, statN1, statN2, statN3, stat1, stat2, stat3, date, bg):
 
     ###filtration###
-    if(stat1 == '\t'): stat1 = 'Coming soon...'
-    if(stat2 == '\t'): stat2 = 'Coming soon...'
-    if(stat3 == '\t'): stat3 = 'Coming soon...'    
+    if(stat1 == '\t' or stat1 != stat1): stat1 = 'Coming soon...'
+    if(stat2 == '\t' or stat2 != stat2): stat2 = 'Coming soon...'
+    if(stat3 == '\t' or stat3 != stat3): stat3 = 'Coming soon...'
+    if(type(stat1) == float): stat1 = int(stat1)
+    if(type(stat2) == float): stat2 = int(stat2)
+    if(type(stat3) == float): stat2 = int(stat3)
+    
 
     textFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 70)
     statFont = ImageFont.truetype('fonts/Inconsolata_Condensed-Regular.ttf', size = 60)
@@ -20,7 +24,7 @@ def make_card(name, statN1, statN2, statN3, stat1, stat2, stat3, date):
     imgName = f'{name}.png'
 
     #creating background
-    make_bg(imgName)
+    make_bg(imgName, bg)
 
 
     imgToMake = Image.open(imgName)
@@ -43,19 +47,19 @@ def make_card(name, statN1, statN2, statN3, stat1, stat2, stat3, date):
     ###text###
 
     #competition name
-    draw.text((522, 50), text = compName, font = copmNameFont, fill = 'black', anchor = 'mm')
+    draw.text((522, 50), text = compN, font = copmNameFont, fill = 'black', anchor = 'mm')
     #person name
     draw.text((90, 140), text = 'Name:', font = signsFont, fill = 'black', anchor = 'lb')
-    draw.text((522, 200), text = personName, font = textFont, fill = 'black', anchor = 'mm' )
+    draw.text((522, 200), text = name, font = textFont, fill = 'black', anchor = 'mm' )
     #stat1
-    draw.text((90, 300), text = statName1, fill = 'black', anchor = 'lb', font = signsFont)
-    draw.text((282, 360), text = stat1, font = textFont, fill = 'black', anchor = 'mm')
+    draw.text((90, 300), text = statN1, fill = 'black', anchor = 'lb', font = signsFont)
+    draw.text((282, 360), text = str(stat1), font = textFont, fill = 'black', anchor = 'mm')
     #stat2
-    draw.text((550, 300), text = statName2, fill = 'black', anchor = 'lb', font = signsFont)
-    draw.text((762, 360), text = stat2, font = textFont, fill = 'black', anchor = 'mm')
+    draw.text((550, 300), text = statN2, fill = 'black', anchor = 'lb', font = signsFont)
+    draw.text((762, 360), text = str(stat2), font = textFont, fill = 'black', anchor = 'mm')
     #stat3
-    draw.text((90, 460), text = statName3, fill = 'black', anchor = 'lb', font = signsFont)
-    draw.text((282, 520), text = stat3, font = textFont, fill = 'black', anchor = 'mm')
+    draw.text((90, 460), text = statN3, fill = 'black', anchor = 'lb', font = signsFont)
+    draw.text((332, 520), text = str(stat3), font = textFont, fill = 'black', anchor = 'mm')
     #date
     draw.text((850, 520), text = date, font = textFont, fill = 'black', anchor = 'mm')
 

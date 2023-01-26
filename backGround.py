@@ -21,9 +21,8 @@ def choose_bg():
     #print(answers['color'])
 
 
-def make_bg(name):
-    bg = choose_bg()
-
+def make_bg(name, bg):
+    
     if(bg == 'blue'): bg = blueBG
     if(bg == 'green'): bg = greenBG
     if(bg == 'orange'): bg = orangeBG
