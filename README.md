@@ -7,17 +7,26 @@ usage:
 3. answer program's questions
 
 column name for stat --> name of column in your .csv file
- 
+
 name for stat --> stat name that will be printed on nametag
 
 
 example of nametag with 1 stat pritned (blue color):
-![Alt text](Long%20Long%20Name%20Name.png)
+<img
+    scr  = examples/Long%20Long%20Name%20Name.png)
+    alt = "img"
+    style = "display: inline-block; margin: 0 auto; max-width: 300px" >
 
 example of nametag with 2 stats printed (green color):
-![Alt text](Long%20Name%20Name%20.png)
+<img
+    scr  = examples/Long%20Name%20Name%20.png)
+    alt = "img"
+    style = "display: inline-block; margin: 0 auto; max-width: 300px" >
 
 example of nametag with 3 stats printed (orange color):
-![Alt text](Name%20Name1.png)
+<img
+    scr  = examples/Name%20Name1.png)
+    alt = "img"
+    style = "display: inline-block; margin: 0 auto; max-width: 300px" >
 
 all nametag will be exported in ready to print pdf file
