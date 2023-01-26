@@ -7,6 +7,7 @@ usage:
 3. answer program's questions
 
 column name for stat --> name of column in your .csv file
+ 
 name for stat --> stat name that will be printed on nametag
 
 
