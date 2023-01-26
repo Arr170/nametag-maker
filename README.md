@@ -11,12 +11,12 @@ name for stat --> stat name that will be printed on nametag
 
 
 example of nametag with 1 stat pritned (blue color):
-![Alt text](../name_cards_demo/Long%20Long%20Name%20Name.png)
+![Alt text](Long%20Long%20Name%20Name.png)
 
 example of nametag with 2 stats printed (green color):
-![Alt text](../name_cards_demo/Long%20Name%20Name%20.png)
+![Alt text](Long%20Name%20Name%20.png)
 
 example of nametag with 3 stats printed (orange color):
-![Alt text](../name_cards_demo/Name%20Name1.png)
+![Alt text](Name%20Name1.png)
 
 all nametag will be exported in ready to print pdf file
