@@ -2,6 +2,7 @@
 from cards import oneStatCard, twoStatCard, threeStatCard
 from pdfMaker import generate_pdfs
 from backGround import choose_bg
+import inquirer
 import os
 
 import pandas as pd
@@ -22,7 +23,16 @@ stats = df.to_dict(orient='record')
 
 #asking for data
 compName = str(input('[a] name of the competition: '))
-namecardMode = int(input('[a] how many stat do u want to place (maximum of 3 stats):'))
+#choosing mode
+options = [
+        inquirer.List(
+            "mode",
+            message = "choose quantity of stats printed on nametag",
+            choices = [1, 2, 3]
+        ),
+    ]
+answers = inquirer.prompt(options)
+namecardMode = answers['mode']
 #warning if wrong number
 if(namecardMode > 3):
     namecardMode = int(input('[!] maximum of 3 stats! '))
@@ -54,7 +64,7 @@ elif(namecardMode == 3):
     statName1 = str(input('[a] name for stat 1: '))
     statName2 = str(input('[a] name for stat 2: '))
     statName3 = str(input('[a] name for stat 3: '))
-    date = str(input('[a] date of the comp in format dd-dd.mm'))
+    date = str(input('[a] date of the comp in format dd-dd.mm: '))
     for stat in stats:
         img = threeStatCard.make_card(compName, stat['name'], statName1, statName2, statName3, stat[columnNameStat1], stat[columnNameStat2], stat[columnNameStat3], date, bg_color)
         imgArrey.append(img)

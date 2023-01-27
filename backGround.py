@@ -12,7 +12,7 @@ def choose_bg():
     options = [
         inquirer.List(
             "color",
-            message = "[a] choose background color",
+            message = "choose background color",
             choices = ['blue', 'green', 'orange', 'custom']
         ),
     ]
