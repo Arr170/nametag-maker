@@ -17,21 +17,24 @@ def choose_bg():
         ),
     ]
     answers = inquirer.prompt(options)
-    return(answers['color'])
-    #print(answers['color'])
+    if(answers['color'] == 'blue'): bg = blueBG
+    if(answers['color'] == 'green'): bg = greenBG
+    if(answers['color'] == 'orange'): bg = orangeBG
+    if(answers['color'] == 'custom'):
+        bg = str(input('[a] enter hex code of color you waht to use (format: #xxxxxx): '))
+    return(bg)
 
 
 def make_bg(name, bg):
-    
-    if(bg == 'blue'): bg = blueBG
-    if(bg == 'green'): bg = greenBG
-    if(bg == 'orange'): bg = orangeBG
-    if(bg == 'custom'):
-        bg = str(input('[a] enter hex code of color you waht to use (format: #xxxxxx): '))
 
     img = Image.new(mode = 'RGB', size = (1044, 655), color = bg)
     img.save(name)
 
     return()
 
+def make_big_bg(name, bg):
+    img = Image.new(mode = 'RGB', size = (2100, 3000), color = bg)
+    img.save(name)
+
+    return()
 

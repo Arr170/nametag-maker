@@ -13,7 +13,6 @@ def make_card(compN, name, statN1, stat1, date, bg):
     statFont = ImageFont.truetype('fonts/Inconsolata_Condensed-Regular.ttf', size = 60)
     signsFont = ImageFont.truetype('fonts/Neucha.ttf', size = 50)
     copmNameFont = ImageFont.truetype('fonts/Neucha.ttf', size = 85)
-    backgoundColor = '#B3C87B'
     windowColor = '#F4F4F4'
     outlineWidht = 5
 

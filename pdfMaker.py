@@ -49,3 +49,18 @@ def generate_pdfs(data):
             i = 0
         
     pdf.output("namecards.pdf")
+
+def generate_big_pdf(data):
+    ### demo pdf, should be finished ###
+    pdf = FPDF()
+    image_count = 0
+    i = 0
+    for image in data:
+        if(i == 0):
+            pdf.image(image, x = 10, y = 10, w = 100, h = 150)
+            image_count +=1
+        elif(i == 1):
+            pdf.image(image, x = 10, y = 170, w = 100, h = 150)
+            image_count += 1
+            i = 0
+    pdf.output("big_namecadrs.pdf")

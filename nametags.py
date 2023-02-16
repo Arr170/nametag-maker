@@ -33,6 +33,7 @@ options = [
     ]
 answers = inquirer.prompt(options)
 namecardMode = answers['mode']
+
 #warning if wrong number
 if(namecardMode > 3):
     namecardMode = int(input('[!] maximum of 3 stats! '))
@@ -46,7 +47,6 @@ if(namecardMode == 1):
         img = oneStatCard.make_card(compName, stat['name'], statName1, stat[columnNameStat1], date, bg_color)
         imgArrey.append(img)
 
-
 elif(namecardMode == 2):
     bg_color = choose_bg()
     columnNameStat1 = str(input('[a] column name for stat 1: '))
@@ -56,6 +56,7 @@ elif(namecardMode == 2):
     for stat in stats:
         img = twoStatCard.make_card(compName, stat['name'], statName1, statName2, stat[columnNameStat1], stat[columnNameStat2], bg_color)
         imgArrey.append(img)
+
 elif(namecardMode == 3):
     bg_color = choose_bg()
     columnNameStat1 = str(input('[a] column name for stat 1: '))
@@ -72,6 +73,5 @@ elif(namecardMode == 3):
 generate_pdfs(imgArrey)
 for img in imgArrey:
     os.remove(img)
-
 
 
