@@ -52,15 +52,27 @@ def generate_pdfs(data):
 
 def generate_big_pdf(data):
     ### demo pdf, should be finished ###
+    print('creating pdf file...')
     pdf = FPDF()
     image_count = 0
     i = 0
     for image in data:
         if(i == 0):
-            pdf.image(image, x = 10, y = 10, w = 100, h = 150)
-            image_count +=1
+            pdf.add_page()
+            pdf.image(image, x = 3, y = 3, w = 100, h = 145)
+            print('inserting', image)
+            i += 1
         elif(i == 1):
-            pdf.image(image, x = 10, y = 170, w = 100, h = 150)
-            image_count += 1
+            pdf.image(image, x = 106, y = 3, w = 100, h = 145)
+            print('inserting', image)
+            i += 1
+        elif(i == 2):
+            pdf.image(image, x = 3, y = 150, w = 100, h = 145)
+            print('inserting', image)
+            i += 1
+        elif(i == 3):
+            pdf.image(image, x = 106, y = 150, w = 100, h = 145)
+            print('inserting', image)
             i = 0
+
     pdf.output("big_namecadrs.pdf")
