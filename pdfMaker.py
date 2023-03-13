@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import os
 
 def generate_pdfs(data):
     pdf = FPDF()
@@ -76,3 +77,4 @@ def generate_big_pdf(data):
             i = 0
 
     pdf.output("big_namecadrs.pdf")
+    return(os.path.abspath("big_namecadrs.pdf"))
