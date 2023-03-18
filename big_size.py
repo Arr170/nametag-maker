@@ -10,11 +10,11 @@ import inquirer
 
 ########################################### PLACE FOR GLOBAL VARIABLES ############################################################
 textFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 80)
-nameFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 90)
+botTextFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 70)
+nameFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 85) #actually compName font
 statFont = ImageFont.truetype('fonts/Inconsolata_Condensed-Regular.ttf', size = 60)
 signsFont = ImageFont.truetype('fonts/Inconsolata_Condensed-Regular.ttf', size = 40)
 eventNameFont = ImageFont.truetype('fonts/Inconsolata_Condensed-Regular.ttf', size = 38)
-copmNameFont = ImageFont.truetype('fonts/Neucha.ttf', size = 85)
 windowColor = '#F4F4F4'
 eventColor = '#DDD9D8'
 eventOutline = '#C6C2C1'
@@ -134,7 +134,7 @@ def make_card(compN, csv, template):
                 imgToMake.paste(image_to_paste(img_to_insert),position[2],image_to_mask(img_to_insert))#event icon
                 draw.text(position[3], text = role, fill = 'black', font = signsFont, anchor = 'mm')#event role
                 pos += 1#counting for placing event boxes
-        
+        draw.text((382, 959), text = 'Good luck!', fill = 'black', font = botTextFont, anchor = 'mm')
         imgToMake.save(img_name)
         img_arr.append(img_name)            
                 
@@ -164,7 +164,6 @@ def main():
     answer = inquirer.prompt(options)
     template = answer['tamplate']
     make_card(competition_name, source_svg, template)
-
 
 
 
