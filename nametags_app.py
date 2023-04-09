@@ -9,6 +9,7 @@ CORS(app)
 
 UPLOAD_FOLDER = r'C:\Users\arsen\proga\nametags_maker\uploaded'
 
+
 @app.route("/downloads")
 def file_downloads():
     try:
@@ -42,14 +43,19 @@ def data():
         
         print(test)
         print(compN, uploaded_files, template)
-        path = big_size.main(src, compN, template)
+        global FILE_PATH 
+        FILE_PATH = big_size.main(src, compN, template)
         
        
         
-        return send_file(path)
+        return send_file(FILE_PATH, as_attachment=True)
     
     return 'get?' 
 
-    
+@app.route("/download", methods = ['GET'])
+def download():
+    print('file is being downloaded, path: ', FILE_PATH)
+    return send_file(FILE_PATH, mimetype='application/pdf', as_attachment=True)
+
 if __name__ == "__main__":
     app.run("localhost", 6969, debug = True)
