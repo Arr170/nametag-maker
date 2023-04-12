@@ -1,17 +1,16 @@
-from flask import Flask, request, make_response, url_for, redirect, send_file, render_template
+from flask import Blueprint, Flask, request, make_response, url_for, redirect, send_file, render_template
 from flask_cors import CORS
 import os
 import big_size
 import small_size_new
 
-app = Flask(__name__,template_folder='templates')
-CORS(app)
-
 
 UPLOAD_FOLDER = r'C:\Users\arsen\proga\nametags_maker\uploaded'
 
+main = Blueprint('main', __name__)
 
-@app.route("/test", methods = ['POST', 'GET'])
+
+@main.route("/test", methods = ['POST', 'GET'])
 def hello():
     if request.method == 'GET':
         return {
@@ -19,19 +18,19 @@ def hello():
             "two": "two"
         }
 
-@app.route("/", methods = ['POST', 'GET'])
+@main.route("/", methods = ['POST', 'GET'])
 def home():
    return render_template('index.html')
 
-@app.route("/Small", methods = ['POST', 'GET'])
+@main.route("/Small", methods = ['POST', 'GET'])
 def small():
    return render_template('index.html')
 
-@app.route("/Big", methods = ['POST', 'GET'])
+@main.route("/Big", methods = ['POST', 'GET'])
 def big():
    return render_template('index.html')
 #server gets csv file, template name and competition name from frontend
-@app.route("/bigsize", methods = ['POST', 'GET'])
+@main.route("/bigsize", methods = ['POST', 'GET'])
 def do_big():
     if request.method == 'POST':
        
@@ -58,7 +57,7 @@ def do_big():
     
     return 'get?' 
 
-@app.route('/smallsize', methods=['POST'])
+@main.route('/smallsize', methods=['POST'])
 def do_small():
     uploaded_arrey = request.form['names']
     compN = request.form['compN']
@@ -71,12 +70,7 @@ def do_small():
     FILE_PATH = small_size_new.main(cleaned_array, compN, color)
     return('ok')
 #sends generated file to frontend
-@app.route("/download", methods = ['GET'])
+@main.route("/download", methods = ['GET'])
 def download():
     print('file is being downloaded, path: ', FILE_PATH)
-    return send_file(FILE_PATH, mimetype='application/pdf', as_attachment=True)
-
-if __name__ == "__main__":
-    app.run("localhost", 6969, debug = True)
-
-#hello = input("press enter to terminate")
+    return send_file(FILE_PATH, mimetype='mainlication/pdf', as_attachment=True)
