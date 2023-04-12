@@ -7,6 +7,8 @@ h1{
 
 body{
     background-color: #273344;
+    
+
 }
 
 .info{  
@@ -24,25 +26,60 @@ body{
 
 .formtext{
     color: #B0BED1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font: message-box;
+    font-size: 20px;
 }
 
 .mainform{
     font:message-box;
-    width: fit-content;
+    width: max-content;
+    height: 55%;
     border-style: solid;
     border-color: #af6d3b;
     border-radius: 5px;
     padding: 10px 25px 10px 50px;
-    margin: 10px 10px 10px 10px;
+    /*margin: 10px 10px 10px 10px;*/
     text-align: block;
     margin:  auto auto 10px auto;
+    display: block;
+    
+    
     
 
 }
 
-.bottombuttons{
+.bottomButtonsContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
+    width: 100%;
+    height: 45%;
     
+}
+
+.bottomButtonsContainerSmall{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    width: 100%;
+    height: 45%;
+    
+}
+
+.bottomButton{
+    display: block;
+    height: 50%;
+    width: 99%;
+    font: message-box;
+    font-size: 30px;
+    color: #273344;
+    border-style: solid;
+    border-color: #af6d3b;
+    border-radius: 5px;
+    background-color: #5E6774;
+    margin: 5px 5px auto 5px;
 }
 
 .interactions{
@@ -87,4 +124,69 @@ body{
 }
 .hidden{
     display: none;
+}
+
+.templateContainer{
+    display: block;
+    margin: auto;
+    padding: auto 5%;
+    width: 40%;
+    height: 100%; 
+}
+
+.templateText{
+    color: #B0BED1;
+    font: message-box;
+    font-size: 30px;
+    margin: 0;
+    float: top;
+    display: block;
+    text-align: center;
+    z-index: 2;
+}
+.templateImg{
+    position: relative;
+    display: block;
+    margin: 0 auto auto auto;
+    width: 90%;
+    height: 90%; 
+    border-color: #af6d3b;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+   
+    gap: 10px;
+}
+
+.TopColumn{
+    
+    padding: auto;
+    
+}
+
+.link{
+    color:#B0BED1;
+    text-align: center;
+    display: block;
+}
+
+.text{
+    color: #B0BED1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font: message-box;
+    font-size: 20px;
+    text-align: center;
+}
+
+.sketch-picker{
+    position: relative;
+    margin: auto;
+    
+    display: block;
 }

@@ -50,6 +50,7 @@ def generate_pdfs(data):
             i = 0
         
     pdf.output("namecards.pdf")
+    return(os.path.abspath("namecards.pdf"))
 
 def generate_big_pdf(data):
     ### demo pdf, should be finished ###

@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+    color: #B0BED1;
+    font:message-box;
+    font-size: 50px;
+}
+
+.text{
+    color: #B0BED1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font: message-box;
+    font-size: 20px;
+    text-align: center;
+}
+
+.link{
+    color:#B0BED1;
+    text-align: center;
+    display: block;
+}
