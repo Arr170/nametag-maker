@@ -1,8 +1,7 @@
 from PIL import  Image, ImageDraw, ImageFont, ImageOps
-from backGround import make_bg
 import pandas as pd
 import csv
-import pdfMaker
+from tools import pdfMaker
 import os
 import inquirer
 

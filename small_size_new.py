@@ -1,5 +1,4 @@
-from pdfMaker import generate_pdfs
-from backGround import make_small_bg
+from tools import backGround, pdfMaker
 from PIL import Image, ImageDraw, ImageFont
 import os
 
@@ -18,7 +17,7 @@ def main(names_arrey, compN, color):
     tags_arrey = []
     for name in names_arrey:
         tag_name = f'{name}.png'
-        nametag = make_small_bg(tag_name, color)
+        nametag = backGround.make_small_bg(tag_name, color)
         nametak_to_edit = Image.open(tag_name)
         draw = ImageDraw.Draw(nametak_to_edit)
         #name rectangle
@@ -31,7 +30,7 @@ def main(names_arrey, compN, color):
         
         nametak_to_edit.save(tag_name)
         tags_arrey.append(tag_name)
-    path = generate_pdfs(tags_arrey)
+    path = pdfMaker.generate_pdfs(tags_arrey)
     for tag in tags_arrey:
         print('cleaning...')
         os.remove(tag)
