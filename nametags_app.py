@@ -77,6 +77,6 @@ def download():
     return send_file(FILE_PATH, mimetype='application/pdf', as_attachment=True)
 
 if __name__ == "__main__":
-    app.run("https://nametags.onrender.com", 6969, debug = True)
+    app.run("nametags.onrender.com", 6969, debug = True)
 
 #hello = input("press enter to terminate")
