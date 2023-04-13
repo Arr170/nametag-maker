@@ -4,11 +4,11 @@ import os
 import big_size
 import small_size_new
 
-app = Flask(__name__,template_folder='templates')
+app = Flask(__name__,template_folder='frontend/build', static_folder='frontend/build/static')
 CORS(app)
 
 
-UPLOAD_FOLDER = r'C:\Users\arsen\proga\nametags_maker\uploaded'
+UPLOAD_FOLDER = '/uploaded'
 
 
 @app.route("/test", methods = ['POST', 'GET'])
