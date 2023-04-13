@@ -3,9 +3,9 @@
 
 import React, { useState} from 'react'
 import axios from 'axios'
-import 'C:/Users/arsen/proga/nametags_maker/frontend/src/App.css'
-import bg2 from 'C:/Users/arsen/proga/nametags_maker/frontend/src/bg_2.png'
-import bg1 from'C:/Users/arsen/proga/nametags_maker/frontend/src/bg_1.png'
+import '../App.css'
+import bg2 from '../bg_2.png'
+import bg1 from'../bg_1.png'
 import { SketchPicker } from 'react-color';
 
 

@@ -3,21 +3,24 @@
 
 import React, { useState} from 'react'
 import axios from 'axios'
-import 'C:/Users/arsen/proga/nametags_maker/frontend/src/App.css'
-import bg2 from 'C:/Users/arsen/proga/nametags_maker/frontend/src/bg_2.png'
-import bg1 from'C:/Users/arsen/proga/nametags_maker/frontend/src/bg_1.png'
+import '../App.css'
+import bg2 from '../bg_2.png'
+import bg1 from'../bg_1.png'
+import ToggleSwitch from '../elements/ToggleSwitch'
 
 
 function Big() {
   const [run, setRun] = useState('interactions')
-  const [template, setTemplate] = useState('bg_1.png')
   const [info, setInfo] = useState('hello')
   const [infoState, setInfoState] = useState('hidden')
   const [readyCheck, setReadyCheck] = useState(0)
   const [shownTemplate, setShownTemplate] = useState(bg1)
+  const [withStats, setWithStats] = useState(1)
 
   
-
+  function handleModeChange(){
+    withStats === 1 ? setWithStats(0): setWithStats(1)
+  }
  
   
   function handleTemplateChange(){
@@ -25,15 +28,8 @@ function Big() {
 
   }
 
-  async function doSmallUpload () {
-    const array = ['ollo', 'nenne', 'heyya']
-    axios.post('/smallsize', array)
-    .then(response => {
-      console.log(response)
-    })
-  }
   
-  async function doupload (event) {
+  async function doBigUpload (event) {
     event.preventDefault()
     const form1 = document.getElementById('form1')
     const formData = new FormData(form1)
@@ -87,10 +83,11 @@ function Big() {
               <p className = 'formtext'>Upload csv file: <input className = 'interactions' type = 'file' name = 'file'/></p>
             </form>
             <div className = 'bottomButtonsContainer'>
-              <button className = 'bottomButton' type = 'submit' onClick = {doupload}>Start</button>
+              <button className = 'bottomButton' type = 'submit' onClick = {doBigUpload}>Start</button>
               <button className = 'bottomButton' onClick = {handleTemplateChange}>Change template</button>
               <button className = 'bottomButton' onClick = {download}>Download PDF</button>
             </div>
+            <ToggleSwitch labelLeft = 'with stats' labelRight='names only'/>
         </div>
         <div className = 'TopColumn'>
           <div className = 'templateContainer'>
