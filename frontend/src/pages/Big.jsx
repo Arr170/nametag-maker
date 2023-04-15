@@ -15,16 +15,43 @@ function Big() {
   const [infoState, setInfoState] = useState('hidden')
   const [readyCheck, setReadyCheck] = useState(0)
   const [shownTemplate, setShownTemplate] = useState(bg1)
-  const [withStats, setWithStats] = useState(1)
+  const [withStats, setWithStats] = useState(0)
+  const [enterStats, setEnterStats] = useState('hidden')
+  const [enterNames, setEnterNames] = useState('formtext')
+  const [sentTemplate, setSentTemplate] = useState('bg_1.png')
 
   
   function handleModeChange(){
-    withStats === 1 ? setWithStats(0): setWithStats(1)
+    console.log('before', withStats)
+    if(withStats)
+    {
+      console.log('hej?')
+      setWithStats(0)
+      setEnterNames('formtext')
+      setEnterStats('hidden')
+    } 
+    else
+    {
+      setWithStats(1)
+      setEnterNames('hidden')
+      setEnterStats('formtext')
+    }
+
+    
   }
  
   
   function handleTemplateChange(){
-    shownTemplate === bg1 ? setShownTemplate(bg2): setShownTemplate(bg1)
+    if(shownTemplate === bg1)
+    {
+      setShownTemplate(bg2)
+      setSentTemplate('bg_2.png')
+    }
+    else{
+      setShownTemplate(bg1)
+      setSentTemplate('bg_1.png')
+    }
+    console.log(shownTemplate)
 
   }
 
@@ -33,18 +60,30 @@ function Big() {
     event.preventDefault()
     const form1 = document.getElementById('form1')
     const formData = new FormData(form1)
+    formData.append('template', sentTemplate)
     setInfoState('info')
     setReadyCheck(0)
 
     console.log('to upload', formData.getAll('compN'))
     setInfo('In process...')
 
-    axios.post('/bigsize', formData)
-    .then(response => {
-      console.log(response)
-    setReadyCheck(1)
-    setInfo('your PDF is ready!')})
-    setRun('interactions')
+    if(withStats)
+    {
+      console.log('uploading stats')
+      axios.post('/bigsizeStats', formData)
+      .then(response => {
+        console.log(response)
+        setReadyCheck(1)
+        setInfo('your PDF is ready!')})
+    }
+    else{
+      console.log('uploading names')
+      axios.post('/bigsizeNames', formData)
+      .then(response => {
+        console.log(response)
+        setReadyCheck(1)
+        setInfo('your PDF is ready!')})
+    }
     
     
   }
@@ -80,14 +119,15 @@ function Big() {
           <div className = 'TopColumn'>
             <form id = 'form1' className = 'mainform'>
               <p className = 'formtext'>Competition name: <input className = 'inputs' type = 'text' name = 'compN'/></p>
-              <p className = 'formtext'>Upload csv file: <input className = 'interactions' type = 'file' name = 'file'/></p>
+              <p className = {enterStats}>Upload csv file: <input className = 'interactions' type = 'file' name = 'file'/></p>
+              <p className = {enterNames}>Type in names separated by enter: <textarea className='inputs' type = 'text' name = 'names'/> </p>
             </form>
             <div className = 'bottomButtonsContainer'>
               <button className = 'bottomButton' type = 'submit' onClick = {doBigUpload}>Start</button>
               <button className = 'bottomButton' onClick = {handleTemplateChange}>Change template</button>
               <button className = 'bottomButton' onClick = {download}>Download PDF</button>
             </div>
-            <ToggleSwitch labelLeft = 'with stats' labelRight='names only'/>
+            <ToggleSwitch checkedLabel = 'with events' uncheckedLabel='names only' onChange={handleModeChange}/>
         </div>
         <div className = 'TopColumn'>
           <div className = 'templateContainer'>

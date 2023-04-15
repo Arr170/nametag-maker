@@ -1,19 +1,19 @@
 import React from "react"
 import './ToggleSwitch.css'
 
-export default function ToggleSwitch({labelLeft, labelRight}){
+export default function ToggleSwitch({uncheckedLabel, checkedLabel, onChange}){
     return(
     <div className="container">
-      {labelLeft}{" "}
+      {uncheckedLabel}{" "}
       <div className="toggle-switch">
-        <input type="checkbox" className="checkbox" 
-               name={labelLeft} id={labelLeft} />
-        <label className="label" htmlFor={labelLeft}>
+        <input  type="checkbox" className="checkbox" 
+               name="modeToggle" id="modeToggle" onChange={onChange}/>
+        <label className="label" htmlFor="modeToggle">
           <span className="inner" />
           <span className="switch" />
         </label>
       </div>
-      {" "}{labelRight}
+      {" "}{checkedLabel}
     </div>
     )
 }

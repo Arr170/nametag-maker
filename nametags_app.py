@@ -8,7 +8,7 @@ app = Flask(__name__,template_folder='frontend/build', static_folder='frontend/b
 CORS(app)
 
 
-UPLOAD_FOLDER = '/uploaded'
+UPLOAD_FOLDER = './uploaded'
 
 
 @app.route("/test", methods = ['POST', 'GET'])
@@ -31,39 +31,35 @@ def small():
 def big():
    return render_template('index.html')
 #server gets csv file, template name and competition name from frontend
-@app.route("/bigsize", methods = ['POST', 'GET'])
-def do_big():
-    if request.method == 'POST':
-       
-        uploaded_files = request.files['file']
-        uploaded_files.save(os.path.join(UPLOAD_FOLDER, uploaded_files.filename))
-        src = os.path.join(UPLOAD_FOLDER, uploaded_files.filename)
+@app.route("/bigsizeStats", methods = ['POST'])
+def do_big():      
+    uploaded_files = request.files['file']
+    uploaded_files.save(os.path.join(UPLOAD_FOLDER, uploaded_files.filename))
+    compN = request.form['compN']
+    template = request.form['template']
+    print('#######', template)
+    src = os.path.join(UPLOAD_FOLDER, uploaded_files.filename)
 
-        #idk, it is kinda useless if statment
-        if 'compN' not in request.form:
-            compN = 'default'
-        else: compN = request.form['compN']
-    
-        if 'template' not in request.form:
-            template = 'bg_1.png'
-        else: template = request.form['template']
-        #print(compN, uploaded_files, template)
+    global FILE_PATH #global variable stores path to generated file, so another function can send it back to frontend
+    FILE_PATH = big_size.main(src, compN, template)
+    return('ok')
 
-        global FILE_PATH #global variable stores path to generated file, so another function can send it back to frontend
-        FILE_PATH = big_size.main(src, compN, template)
-        
-       
-        
-        return('ok')
-    
-    return 'get?' 
+@app.route("/bigsizeNames", methods = ['POST'])
+def do_big_names():
+    compN = request.form['compN']
+    uploaded_array = request.form['names']
+    uploaded_array = uploaded_array.split('\n')
+    cleaned_array = [s.replace('\r', '') for s in uploaded_array]
+
+    print(cleaned_array)
+    return('ok')
 
 @app.route('/smallsize', methods=['POST'])
 def do_small():
-    uploaded_arrey = request.form['names']
+    uploaded_array = request.form['names']
     compN = request.form['compN']
     color = request.form['color']
-    uploaded_array = uploaded_arrey.split('\n')
+    uploaded_array = uploaded_array.split('\n')
     cleaned_array = [s.replace('\r', '') for s in uploaded_array]
     print(cleaned_array, compN, color)
 
