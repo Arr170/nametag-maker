@@ -118,7 +118,7 @@ def make_card(compN, csv, template):
     for n in range(len(events)):
         imgToMake = make_bg_img(template, compN)
         draw = ImageDraw.Draw(imgToMake)
-        pos = 0
+        pos = 0 #tracking event boxes
         for name in (column_names):
             if(name == 'Name'): 
                 draw.text((382,226), text = events.loc[n, name], font = textFont, anchor = 'mm', fill = 'black')
