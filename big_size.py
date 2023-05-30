@@ -1,7 +1,7 @@
 from PIL import  Image, ImageDraw, ImageFont, ImageOps
 import pandas as pd
 import csv
-from tools import pdfMaker
+from tools import pdfMaker, filter
 import os
 import inquirer
 
@@ -56,9 +56,6 @@ def event_switch(event):
     if(event == 'sq1'): return(r'png_events\sq1.png')
     return(event)
 
-def role_filter(role):
-    if(type(role)  is not str): return('---')
-    else: return(role)
 
 def box_position_switch(pos):
     if(pos == 0): return([[(90,345), (150, 405)],[(170,345),(300,405)], (90,345,150, 405), (235,375)])
@@ -127,7 +124,7 @@ def make_card(compN, csv, template):
                 position = box_position_switch(pos)#taking coordinates for boxes and text
                 event = event_switch(name)#event image png file name
                 img_to_insert = Image.open(event)#opening event image
-                role = role_filter(events.loc[n,name])#filtening roles (no role = '---')  
+                role = filter.empty_to_placeholder(events.loc[n,name])#filtening roles (no role = '---')  
                 draw.rounded_rectangle(position[0], radius = 5, fill = eventColor, outline = eventOutline, width = outlineWidht)#making box foe event icon
                 draw.rounded_rectangle(position[1], radius = 5, fill = eventColor, outline = eventOutline, width = outlineWidht)#making box for roles text
                 imgToMake.paste(image_to_paste(img_to_insert),position[2],image_to_mask(img_to_insert))#event icon

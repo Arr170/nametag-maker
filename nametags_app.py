@@ -3,13 +3,13 @@ from flask_cors import CORS
 import os
 import big_size
 import small_size_new
+import big_size_names
 
 app = Flask(__name__,template_folder='frontend/build', static_folder='frontend/build/static')
 CORS(app)
 
 
 UPLOAD_FOLDER = './uploaded'
-
 
 @app.route("/test", methods = ['POST', 'GET'])
 def hello():
@@ -40,18 +40,21 @@ def do_big():
     print('#######', template)
     src = os.path.join(UPLOAD_FOLDER, uploaded_files.filename)
 
-    global FILE_PATH #global variable stores path to generated file, so another function can send it back to frontend
+    
+    global FILE_PATH
     FILE_PATH = big_size.main(src, compN, template)
     return('ok')
 
 @app.route("/bigsizeNames", methods = ['POST'])
 def do_big_names():
+    uploaded_files = request.files['file']
+    uploaded_files.save(os.path.join(UPLOAD_FOLDER, uploaded_files.filename))
     compN = request.form['compN']
-    uploaded_array = request.form['names']
-    uploaded_array = uploaded_array.split('\n')
-    cleaned_array = [s.replace('\r', '') for s in uploaded_array]
-
-    print(cleaned_array)
+    date = request.form['date']
+    template = request.form['template']
+  
+    global FILE_PATH    
+    FILE_PATH = big_size_names.main(compN, os.path.join(UPLOAD_FOLDER, uploaded_files.filename), template, date)
     return('ok')
 
 @app.route('/smallsize', methods=['POST'])
@@ -63,6 +66,7 @@ def do_small():
     cleaned_array = [s.replace('\r', '') for s in uploaded_array]
     print(cleaned_array, compN, color)
 
+    
     global FILE_PATH
     FILE_PATH = small_size_new.main(cleaned_array, compN, color)
     return('ok')

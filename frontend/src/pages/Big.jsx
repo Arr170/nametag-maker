@@ -119,8 +119,8 @@ function Big() {
           <div className = 'TopColumn'>
             <form id = 'form1' className = 'mainform'>
               <p className = 'formtext'>Competition name: <input className = 'inputs' type = 'text' name = 'compN'/></p>
-              <p className = {enterStats}>Upload csv file: <input className = 'interactions' type = 'file' name = 'file'/></p>
-              <p className = {enterNames}>Type in names separated by enter: <textarea className='inputs' type = 'text' name = 'names'/> </p>
+              <p className = 'formtext'>Upload csv file: <input className = 'interactions' type = 'file' name = 'file'/></p>
+              <p className = {enterNames}>Date: <input className='inputs' type = 'text' name = 'date'/> </p>
             </form>
             <div className = 'bottomButtonsContainer'>
               <button className = 'bottomButton' type = 'submit' onClick = {doBigUpload}>Start</button>
