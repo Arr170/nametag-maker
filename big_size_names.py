@@ -38,9 +38,9 @@ def main(compN, csv, template, date):
         draw = ImageDraw.Draw(img_to_make)
         img_name = f'{name}.png'
         #writing name into card
-        draw.text((382,339), text = name, font = textFont, anchor = 'mm', fill = 'black')
+        draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
         #writing wca ID
-        draw.text((382, 550), text = WCA_ID, font = dateFont, anchor = 'mm', fill  = 'black')
+        draw.text((200, 500), text = WCA_ID, font = dateFont, anchor = 'mm', fill  = 'black')
         img_to_make.save(img_name)
         array_to_delete.append(img_name)
         print(array_to_delete)
@@ -58,28 +58,29 @@ def make_bg_img(path, compName, date, bgColor):
     bg_image = path
 
     bgToMake = Image.open(bg_image)
-    bgToMake = bgToMake.resize((764, 1024))
+    bgToMake = bgToMake.resize((764, 894))
     draw = ImageDraw.Draw(bgToMake)  
 
     ### structures ###
     #name 
-    draw.rounded_rectangle([(50, 285),(714,400)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
+    draw.rounded_rectangle([(50, 235),(714,350)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
     #wca ID
-    draw.rounded_rectangle([(230, 500),(534,600)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
+    draw.rounded_rectangle([(50, 450),(350,550)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
     #date 
-    draw.rounded_rectangle([(230, 700),(534,800)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
-    #white bottom
-    draw.rectangle([(0, 1024), (764, 894)], fill = bgColor, outline = 'gray')
+    draw.rounded_rectangle([(50, 650),(350,750)], radius = 5, fill = bgColor, outline = 'gray', width = 2)
     #white top
     draw.rectangle([(0,0),(764, 150)], fill = bgColor, outline = 'gray')
     #outline
-    draw.rectangle([(0,0), (764, 1024)], outline = 'black', width = 3)
+    draw.rectangle([(0,0), (764, 894)], outline = 'black', width = 3)
 
     ### text ###
     #comp name
     draw.text((382,75), text = compName, anchor = 'mm', font = nameFont, fill = 'black')
-    draw.text((382, 750), text = date, font = dateFont, anchor = 'mm', fill = 'black')
+    #date
+    draw.text((200, 700), text = date, font = dateFont, anchor = 'mm', fill = 'black')
 
     return(bgToMake)
 
-#a = main('idk', './uploaded/new.csv', 'bg_1.png', 'nonoe')
+
+if __name__=='__main__':
+    a = main('Kostelec Open 2023', 'new.csv', 'bg_1.png', '12-13.5.')
