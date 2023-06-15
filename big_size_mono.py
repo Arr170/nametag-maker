@@ -3,11 +3,12 @@ from tools import pdfMaker, filter
 import os
 import pandas as pd
 ########################################### PLACE FOR 'GLOBAL' VARIABLES ############################################################
-textFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 80)
-nameFont = ImageFont.truetype('fonts/Neucha.ttf', size = 85) #actually compName font
-dateFont = ImageFont.truetype('fonts/Inconsolata_Condensed-SemiBold.ttf', size = 70)
-signsFont = ImageFont.truetype('fonts/Neucha.ttf', size = 50)
-windowColor = '#F4F4F4'
+textFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 65)
+nameFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 85) #actually compName font
+dateFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)
+idFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 50)
+signsFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 50)
+windowColor = '#E8E8E8'
 
 eventOutline = '#C6C2C1'
 outlineWidht = 3
@@ -36,7 +37,7 @@ def main(compN, csv, color, date):
         #writing name into card
         draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
         #writing wca ID
-        draw.text((200, 500), text = WCA_ID, font = dateFont, anchor = 'mm', fill  = 'black')
+        draw.text((225, 500), text = WCA_ID, font = idFont, anchor = 'mm', fill  = 'black')
         img_to_make.save(img_name)
         array_to_delete.append(img_name)
         print(array_to_delete)
@@ -45,9 +46,11 @@ def main(compN, csv, color, date):
 
     print('cleaning...')
     for image in array_to_delete:
-        print('removing', image)
-        os.remove(image)
-    
+        try:
+            print('removing', image)
+            os.remove(image)
+        except Exception as e:
+            print(e)
     return(path)
 
 def make_bg_img(color, compName, date, bgColor):
@@ -61,7 +64,7 @@ def make_bg_img(color, compName, date, bgColor):
     draw.rounded_rectangle([(50, 235),(714,350)], radius = 40, fill = bgColor, outline = 'black', width = 2)
     #wca ID
     draw.text((90, 440), text = 'WCA ID:', anchor='lb', fill = 'black', font = signsFont)
-    draw.rounded_rectangle([(50, 450),(350,550)], radius = 40, fill = bgColor, outline = 'black', width = 2)
+    draw.rounded_rectangle([(50, 450),(400,550)], radius = 40, fill = bgColor, outline = 'black', width = 2)
     #date 
     draw.text((90, 640), text = 'Date:', anchor='lb', fill = 'black', font = signsFont)
     draw.rounded_rectangle([(50, 650),(350,750)], radius = 40, fill = bgColor, outline = 'black', width = 2)
@@ -78,5 +81,5 @@ def make_bg_img(color, compName, date, bgColor):
 
 
 if __name__=='__main__':
-    a = main('Prague Open 2023', 'PragueOpen2023-registration.csv', '#B2D866', '17-18.6')
+    a = main('Prague Open 2023', 'PragueOpen2023-registration.csv', '#C3A9EE', '17-18.6.')
     #82B36A

@@ -61,19 +61,19 @@ def generate_big_pdf(data):
     for image in data:
         if(i == 0):
             pdf.add_page()
-            pdf.image(image, x = 3, y = 3, w = 100, h = 145)
+            pdf.image(image, x = 3, y = 3, w = 100, h = 135)
             print('inserting', image)
             i += 1
         elif(i == 1):
-            pdf.image(image, x = 106, y = 3, w = 100, h = 145)
+            pdf.image(image, x = 106, y = 3, w = 100, h = 135)
             print('inserting', image)
             i += 1
         elif(i == 2):
-            pdf.image(image, x = 3, y = 150, w = 100, h = 145)
+            pdf.image(image, x = 3, y = 145, w = 100, h = 135)
             print('inserting', image)
             i += 1
         elif(i == 3):
-            pdf.image(image, x = 106, y = 150, w = 100, h = 145)
+            pdf.image(image, x = 106, y = 145, w = 100, h = 135)
             print('inserting', image)
             i = 0
 
