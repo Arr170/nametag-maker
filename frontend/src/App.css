@@ -11,6 +11,10 @@ body{
 
 }
 
+.justShow{
+    padding: 5px;
+}
+
 .info{  
     width: fit-content;
     padding: 7px;

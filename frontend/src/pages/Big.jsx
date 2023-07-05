@@ -7,10 +7,10 @@ import '../App.css'
 import bg2 from '../bg_2.png'
 import bg1 from'../bg_1.png'
 import ToggleSwitch from '../elements/ToggleSwitch'
+import { SketchPicker } from 'react-color'
 
 
 function Big() {
-  const [run, setRun] = useState('interactions')
   const [info, setInfo] = useState('hello')
   const [infoState, setInfoState] = useState('hidden')
   const [readyCheck, setReadyCheck] = useState(0)
@@ -19,7 +19,31 @@ function Big() {
   const [enterStats, setEnterStats] = useState('hidden')
   const [enterNames, setEnterNames] = useState('formtext')
   const [sentTemplate, setSentTemplate] = useState('bg_1.png')
+  const [showColorPicker, setShowColorPicker] = useState('justShow') //or hidden
+  const [showBgPreview, setShowBgPreview] = useState('hidden') //or templateContainer
+  let backgroundColor = '#fff'
 
+  
+  class ColorPick extends React.Component {
+    state = {
+      background: '#fff',
+    }
+  
+    handleChangeComplete = (color) => {
+      this.setState({ background: color.hex })
+      backgroundColor = color.hex
+      console.log(backgroundColor)
+    }
+  
+    render() {
+      return (
+        <SketchPicker
+          color={ this.state.background }
+          onChangeComplete={ this.handleChangeComplete }
+        />
+      )
+    }
+  }
   
   function handleModeChange(){
     console.log('before', withStats)
@@ -27,13 +51,17 @@ function Big() {
     {
       console.log('hej?')
       setWithStats(0)
+      setShowColorPicker('justShow')
       setEnterNames('formtext')
+      setShowBgPreview('hidden')
       setEnterStats('hidden')
     } 
     else
     {
       setWithStats(1)
       setEnterNames('hidden')
+      setShowColorPicker('hidden')
+      setShowBgPreview('templateContainer')
       setEnterStats('formtext')
     }
 
@@ -61,6 +89,7 @@ function Big() {
     const form1 = document.getElementById('form1')
     const formData = new FormData(form1)
     formData.append('template', sentTemplate)
+    formData.append('color', backgroundColor)
     setInfoState('info')
     setReadyCheck(0)
 
@@ -103,12 +132,10 @@ function Big() {
         document.body.appendChild(link)
         link.click()
         setInfoState('hidden')
+        setReadyCheck(0)
         })}
     else{
       setInfo('I said IN PROCESS!')
-      if(run === 'interactions'){setRun('runleft')}
-      if(run === 'runleft'){setRun('runright')}
-      if(run === 'runright'){setRun('runleft')}
     }
   }
   //console.log(data)
@@ -130,9 +157,13 @@ function Big() {
             <ToggleSwitch checkedLabel = 'with events' uncheckedLabel='names only' onChange={handleModeChange}/>
         </div>
         <div className = 'TopColumn'>
-          <div className = 'templateContainer'>
+          <div className = {showBgPreview} > 
             <p className = 'templateText'>Chosen template:</p>
             <img className='templateImg' src = {shownTemplate} alt = 'template'/>
+          </div>
+          <div className={showColorPicker}>
+            <p className='text'>Choose color for your nametag:</p>
+            <ColorPick className='colorPick' />
           </div>
         </div>
       </div>

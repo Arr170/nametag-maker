@@ -3,7 +3,8 @@ from flask_cors import CORS
 import os
 import big_size
 import small_size_new
-import big_size_names
+import big_size_mono
+
 
 app = Flask(__name__,template_folder='frontend/build', static_folder='frontend/build/static')
 CORS(app)
@@ -13,11 +14,9 @@ UPLOAD_FOLDER = './uploaded'
 
 @app.route("/test", methods = ['POST', 'GET'])
 def hello():
-    if request.method == 'GET':
-        return {
-            "one":[ "one", "two"],
-            "two": "two"
-        }
+    if request.method == 'POST':
+        print(request.files)
+    return 'ok'
 
 @app.route("/", methods = ['POST', 'GET'])
 def home():
@@ -51,10 +50,10 @@ def do_big_names():
     uploaded_files.save(os.path.join(UPLOAD_FOLDER, uploaded_files.filename))
     compN = request.form['compN']
     date = request.form['date']
-    template = request.form['template']
+    color = request.form['color']
   
     global FILE_PATH    
-    FILE_PATH = big_size_names.main(compN, os.path.join(UPLOAD_FOLDER, uploaded_files.filename), template, date)
+    FILE_PATH = big_size_mono.main(compN, os.path.join(UPLOAD_FOLDER, uploaded_files.filename), color, date)
     return('ok')
 
 @app.route('/smallsize', methods=['POST'])

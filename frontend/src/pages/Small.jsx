@@ -4,18 +4,13 @@
 import React, { useState} from 'react'
 import axios from 'axios'
 import '../App.css'
-import bg2 from '../bg_2.png'
-import bg1 from'../bg_1.png'
-import { SketchPicker } from 'react-color';
+import { SketchPicker } from 'react-color'
 
 
 function Small() {
-  const [run, setRun] = useState('interactions')
-  const [template, setTemplate] = useState('bg_1.png')
   const [info, setInfo] = useState('hello')
   const [infoState, setInfoState] = useState('hidden')
   const [readyCheck, setReadyCheck] = useState(0)
-  const [shownTemplate, setShownTemplate] = useState(bg1)
   let backgroundColor = '#fff'
 
   
@@ -39,21 +34,14 @@ function Small() {
       )
     }
   }
- 
-  
-  function handleTemplateChange(){
-    shownTemplate === bg1 ? setShownTemplate(bg2): setShownTemplate(bg1)
-
-  }
 
   function doSmallUpload () {
     //creating formData to post
     const gotNames = document.getElementsByName('names')
     const compN = document.getElementsByName('compN')
-    const color = backgroundColor
     const form = document.getElementById('form1')
     const formData = new FormData(form)
-    formData.append('color', color)
+    formData.append('color', backgroundColor)
 
     setInfoState('info')
     setReadyCheck(0)
@@ -70,24 +58,6 @@ function Small() {
     })
   }
   
-  /*async function doupload (event) {
-    event.preventDefault()
-    const form1 = document.getElementById('form1')
-    const formData = new FormData(form1)
-    setInfoState('info')
-    setReadyCheck(0)
-
-    console.log('to upload', formData.getAll('compN'))
-    setInfo('In progress...')
-
-    axios.post('/bigsize', formData)
-    .then(response => {
-      console.log(response)
-    setReadyCheck(1)
-    setInfo('your PDF is ready!')})
-    setRun('interactions')  
-  }*/
-
   function download(){
     if(readyCheck){
       
@@ -104,12 +74,10 @@ function Small() {
         document.body.appendChild(link)
         link.click()
         setInfoState('hidden')
+        setReadyCheck(0)
         })}
     else{
-      setInfo('I said IN PROGRESS!')
-      if(run === 'interactions'){setRun('runleft')}
-      if(run === 'runleft'){setRun('runright')}
-      if(run === 'runright'){setRun('runleft')}
+      setInfo('I said IN PROGRESS!')     
     }
   }
   //console.log(data)
