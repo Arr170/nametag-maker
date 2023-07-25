@@ -3,13 +3,13 @@ from tools import pdfMaker, filter
 import os
 import pandas as pd
 ########################################### PLACE FOR 'GLOBAL' VARIABLES ############################################################
-textFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 65)
+textFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 65)#for max name lengh 20 (including space)
+longTextFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)#for names 20-22 characters  (including space)
 nameFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 85) #actually compName font
-dateFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)
 idFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 50)
 signsFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 50)
+dateFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)
 windowColor = '#E8E8E8'
-
 eventOutline = '#C6C2C1'
 outlineWidht = 3
 ####################################################################################################################################
@@ -33,9 +33,12 @@ def main(compN, csv, color, date):
         print(name, WCA_ID)
         img_to_make = make_bg_img(color, compN, date, windowColor)
         draw = ImageDraw.Draw(img_to_make)
-        img_name = f'{name}.png'
-        #writing name into card
-        draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
+        img_name = f'{name}-{WCA_ID}.png'
+        #writing name into card\
+        if len(name) < 20:
+            draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
+        else:
+            draw.text((382,289), text = name, font = longTextFont, anchor = 'mm', fill = 'black')
         #writing wca ID
         draw.text((225, 500), text = WCA_ID, font = idFont, anchor = 'mm', fill  = 'black')
         img_to_make.save(img_name)
@@ -81,5 +84,5 @@ def make_bg_img(color, compName, date, bgColor):
 
 
 if __name__=='__main__':
-    a = main('Prague Open 2023', 'PragueOpen2023-registration.csv', '#C3A9EE', '17-18.6.')
+    a = main('Prague Open 2023', 'new.csv', '#C3A9EE', '17-18.6.')
     #82B36A
