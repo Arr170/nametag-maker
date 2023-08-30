@@ -34,7 +34,7 @@ def main(compN, csv, color, date):
         img_to_make = make_bg_img(color, compN, date, windowColor)
         draw = ImageDraw.Draw(img_to_make)
         img_name = f'{name}-{WCA_ID}.png'
-        #writing name into card\
+        #writing name into card
         if len(name) < 20:
             draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
         else:

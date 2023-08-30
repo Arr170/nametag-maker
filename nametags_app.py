@@ -2,7 +2,7 @@ from flask import Flask, request, make_response, url_for, redirect, send_file, r
 from flask_cors import CORS
 import os
 import big_size
-import small_size_new
+import small_size_flags
 import big_size_mono
 
 
@@ -58,18 +58,18 @@ def do_big_names():
 
 @app.route('/smallsize', methods=['POST'])
 def do_small():
-    uploaded_array = request.form['names']
+    uploaded_files = request.files['file']
+    uploaded_files.save(os.path.join(UPLOAD_FOLDER, uploaded_files.filename))
     compN = request.form['compN']
     color = request.form['color']
-    uploaded_array = uploaded_array.split('\n')
-    cleaned_array = [s.replace('\r', '') for s in uploaded_array]
-    print(cleaned_array, compN, color)
+    print(os.path.join(UPLOAD_FOLDER, uploaded_files.filename), compN, color)
 
     
     global FILE_PATH
-    FILE_PATH = small_size_new.main(cleaned_array, compN, color)
+    FILE_PATH = small_size_flags.main(os.path.join(UPLOAD_FOLDER, uploaded_files.filename), compN, color)
     return('ok')
 #sends generated file to frontend
+
 @app.route("/download", methods = ['GET'])
 def download():
     print('file is being downloaded, path: ', FILE_PATH)
