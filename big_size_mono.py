@@ -17,22 +17,23 @@ outlineWidht = 3
 
 def main(compN, csv, color, date):
     print('creating nametags...', color)
-    names = pd.read_csv(csv)
+    names = pd.read_csv(csv)#csv from wca
    
     array_to_delete = [] #storing image names to delete after creating pdf
 
-    #storing column names
-    column_names = [] 
-    for column in names:
-        column_names.append(column)
     names = names.to_dict('records')
-    print(names,'\n', column_names)
+    print(names,'\n')
     for row in names:
-        name = filter.empty_to_placeholder(row[column_names[0]])
-        WCA_ID = filter.empty_to_placeholder(row[column_names[1]])
+        name = filter.empty_to_placeholder(row["Name"])
+        WCA_ID = filter.empty_to_placeholder(row["WCA ID"])
+        country = row["Country"]
         print(name, WCA_ID)
-        img_to_make = make_bg_img(color, compN, date, windowColor)
+        refactored_country_name = country.replace(" ", "-")#changes country name to png naming format
+
+        img_to_make = make_bg_img(color, compN, date, windowColor, refactored_country_name)
         draw = ImageDraw.Draw(img_to_make)
+
+
         img_name = f'{name}-{WCA_ID}.png'
         #writing name into card
         if len(name) < 20:
@@ -56,10 +57,12 @@ def main(compN, csv, color, date):
             print(e)
     return(path)
 
-def make_bg_img(color, compName, date, bgColor):
+def make_bg_img(color, compName, date, bgColor, country_name):
     
     bgToMake = Image.new(mode = 'RGB', size = (764, 894), color = color)
     draw = ImageDraw.Draw(bgToMake)  
+    country_flag = Image.open(f'flags/{country_name}.png').resize((120,100))
+    logo = Image.open('logochampionship.png').resize((350,350))
 
     ### structures ###
     #name 
@@ -73,6 +76,10 @@ def make_bg_img(color, compName, date, bgColor):
     draw.rounded_rectangle([(50, 650),(350,750)], radius = 40, fill = bgColor, outline = 'black', width = 2)
     #outline
     draw.rectangle([(0,0), (764, 894)], outline = 'black', width = 3)
+    #add flag
+    bgToMake.paste(country_flag,(510,450, 630, 550),country_flag)
+    #add logo
+    bgToMake.paste(logo,(400,550),logo)
 
     ### text ###
     #comp name
@@ -82,6 +89,13 @@ def make_bg_img(color, compName, date, bgColor):
 
     return(bgToMake)
 
+def image_to_mask(img):
+    img = img.convert("L")
+    img = ImageOps.colorize(img, black = 'white', white = 'black').convert("L")
+    return(img)
+
+def image_to_paste(img):
+    return(img.convert("L"))
 
 if __name__=='__main__':
     a = main('Prague Open 2023', 'new.csv', '#C3A9EE', '17-18.6.')
