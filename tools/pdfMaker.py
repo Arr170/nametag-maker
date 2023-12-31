@@ -65,15 +65,15 @@ def generate_big_pdf(data):
             print('inserting', image)
             i += 1
         elif(i == 1):
-            pdf.image(image, x = 106, y = 3, w = 100, h = 135)
+            pdf.image(image, x = 103, y = 3, w = 100, h = 135)
             print('inserting', image)
             i += 1
         elif(i == 2):
-            pdf.image(image, x = 3, y = 145, w = 100, h = 135)
+            pdf.image(image, x = 3, y = 138, w = 100, h = 135)
             print('inserting', image)
             i += 1
         elif(i == 3):
-            pdf.image(image, x = 106, y = 145, w = 100, h = 135)
+            pdf.image(image, x = 103, y = 138, w = 100, h = 135)
             print('inserting', image)
             i = 0
 

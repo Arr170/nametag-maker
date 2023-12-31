@@ -5,7 +5,9 @@ import pandas as pd
 ########################################### PLACE FOR 'GLOBAL' VARIABLES ############################################################
 textFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 65)#for max name lengh 20 (including space)
 longTextFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)#for names 20-22 characters  (including space)
-nameFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 85) #actually compName font
+longLongTextFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 50)#for names 22+ characters  (including space)
+
+nameFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 75) #actually compName font
 idFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 50)
 signsFont = ImageFont.truetype('fonts/Sumana-Regular.ttf', size = 50)
 dateFont = ImageFont.truetype('fonts/Sumana-Bold.ttf', size = 55)
@@ -38,8 +40,10 @@ def main(compN, csv, color, date):
         #writing name into card
         if len(name) < 20:
             draw.text((382,289), text = name, font = textFont, anchor = 'mm', fill = 'black')
-        else:
+        elif len(name) < 22:
             draw.text((382,289), text = name, font = longTextFont, anchor = 'mm', fill = 'black')
+        else:
+            draw.text((382,289), text = name, font = longLongTextFont, anchor = 'mm', fill = 'black')
         #writing wca ID
         draw.text((225, 500), text = WCA_ID, font = idFont, anchor = 'mm', fill  = 'black')
         img_to_make.save(img_name)
@@ -62,7 +66,7 @@ def make_bg_img(color, compName, date, bgColor, country_name):
     bgToMake = Image.new(mode = 'RGB', size = (764, 894), color = color)
     draw = ImageDraw.Draw(bgToMake)  
     country_flag = Image.open(f'flags/{country_name}.png').resize((120,100))
-    logo = Image.open('logochampionship.png').resize((350,350))
+    logo = Image.open('logochampionship.png').resize((350,350))##only for nats
 
     ### structures ###
     #name 
@@ -77,13 +81,15 @@ def make_bg_img(color, compName, date, bgColor, country_name):
     #outline
     draw.rectangle([(0,0), (764, 894)], outline = 'black', width = 3)
     #add flag
-    bgToMake.paste(country_flag,(510,450, 630, 550),country_flag)
+    bgToMake.paste(country_flag,(520,450, 640, 550),country_flag)
     #add logo
     bgToMake.paste(logo,(400,550),logo)
 
     ### text ###
     #comp name
     draw.text((382,75), text = compName, anchor = 'mm', font = nameFont, fill = 'black')
+    ###ONLY FOR NATS, DELETE IT!!!!!!!!!!!!!!!!!!!!!!!!!!!#####################################################################################################
+    draw.text((670,150), text = "2023", anchor = "mm",  font = nameFont, fill = "black")
     #date
     draw.text((200, 700), text = date, font = dateFont, anchor = 'mm', fill = 'black')
 
@@ -98,5 +104,5 @@ def image_to_paste(img):
     return(img.convert("L"))
 
 if __name__=='__main__':
-    a = main('Prague Open 2023', 'new.csv', '#C3A9EE', '17-18.6.')
+    a = main('Czech Championship', 'new.csv', '#C3A9EE', '17-18.6.')
     #82B36A
